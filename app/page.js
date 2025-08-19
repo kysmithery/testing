@@ -1,27 +1,22 @@
 'use client';
 
+import * as Sentry from "@sentry/nextjs";
+
 export default function Home() {
-  const handleClick = () => {
-    console.log("Button clicked!");
-    // Simulate an error for Sentry
+  const triggerClientError = () => {
     try {
-      throw new Error("Client-side button click error!");
+      throw new Error("This is a client-side test error!");
     } catch (error) {
-      // In a real application, you might want to capture this error with Sentry
-      // Sentry.captureException(error);
-      console.error("Caught error:", error.message);
+      Sentry.captureException(error);
+      console.error("Sentry captured an error:", error);
     }
   };
 
   return (
     <div>
-      <h1>Welcome to Next.js with Sentry!</h1>
-      <p>This is an example application demonstrating Sentry integration.</p>
-      <button onClick={handleClick}>
-        Trigger Client-Side Error
-      </button>
-      <p>Click the button above to test client-side error capture.</p>
-      {/* Other content for your page */}
+      <h1>Sentry Next.js Example</h1>
+      <p>Click the button below to trigger a client-side error.</p>
+      <button onClick={triggerClientError}>Trigger Client Error</button>
     </div>
   );
 }
