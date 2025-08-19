@@ -1,15 +1,19 @@
 'use client';
 
 export default function Home() {
-  const triggerError = () => {
-    throw new Error('This is a test error from the client!');
+  const handleClick = () => {
+    // In a real application, this might trigger a Sentry error or other client-side logic.
+    console.log('Button clicked! This action is now allowed.');
   };
 
   return (
-    <main>
-      <h1>Sentry Next.js Example</h1>
-      <p>Click the button below to trigger an error.</p>
-      <button onClick={triggerError}>Trigger Client Error</button>
-    </main>
+    <div>
+      <h1>Welcome to the Sentry Next.js Example!</h1>
+      <p>This is a basic page to demonstrate Sentry integration.</p>
+      <button onClick={handleClick}>
+        Click me for client-side interaction
+      </button>
+      <p>This page is now a Client Component to support interactivity.</p>
+    </div>
   );
 }
