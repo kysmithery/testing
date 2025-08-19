@@ -2,34 +2,26 @@
 
 export default function Home() {
   const handleClick = () => {
-    alert('Button clicked!');
+    console.log("Button clicked!");
+    // Simulate an error for Sentry
+    try {
+      throw new Error("Client-side button click error!");
+    } catch (error) {
+      // In a real application, you might want to capture this error with Sentry
+      // Sentry.captureException(error);
+      console.error("Caught error:", error.message);
+    }
   };
 
   return (
-    <main style={{
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      minHeight: '100vh',
-      fontFamily: 'sans-serif'
-    }}>
+    <div>
       <h1>Welcome to Next.js with Sentry!</h1>
-      <p>This is an example application to demonstrate Sentry integration.</p>
-      <button
-        onClick={handleClick}
-        style={{
-          padding: '10px 20px',
-          fontSize: '16px',
-          cursor: 'pointer',
-          marginTop: '20px'
-        }}
-      >
-        Click me for interactivity
+      <p>This is an example application demonstrating Sentry integration.</p>
+      <button onClick={handleClick}>
+        Trigger Client-Side Error
       </button>
-      <p style={{ marginTop: '20px', color: '#888' }}>
-        Check your console for Sentry logs and errors.
-      </p>
-    </main>
+      <p>Click the button above to test client-side error capture.</p>
+      {/* Other content for your page */}
+    </div>
   );
 }
